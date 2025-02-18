@@ -1,10 +1,10 @@
-import { Router, Request, Response} from 'express';
+import { Router } from 'express';
 import { HomeController } from '../controllers/HomeController';
 import { authJwtValidate } from '../middlewares/Auth-middleware';
 
 export class HomeRouter {
 	public router: Router;
-	private home_ci: HomeController;
+	private readonly home_ci: HomeController;
 
 	constructor(){
 		this.home_ci = new HomeController();

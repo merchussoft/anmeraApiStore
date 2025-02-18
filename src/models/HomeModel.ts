@@ -5,7 +5,7 @@ import { QUERYRESPONSE } from "../interfaces/MysqlConfig-interface";
 
 export class HomeModel {
 
-    private db: DatabaseConfig;
+    private readonly db: DatabaseConfig;
 
     constructor() {
         this.db = new DatabaseConfig();
@@ -18,7 +18,7 @@ export class HomeModel {
 
     async login( data_login:LOGINDATA) {
 
-        const {usuario, password}:LOGINDATA = data_login;
+        const {usuario} = data_login;
 
         try {
             let sql_usuario = `SELECT COUNT(cod_empleado) as count, password as contrasena, cod_empleado FROM ${process.env.DB_NAME_BASEADMIN}.empleados WHERE usuario=? GROUP BY cod_empleado`;

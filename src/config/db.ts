@@ -1,7 +1,6 @@
 import mysql from 'mysql2/promise';
 import { Config } from './config';
 import { queryResult } from '../utils/Response-util';
-import { QUERYRESPONSE } from '../interfaces/MysqlConfig-interface';
 
 export class DatabaseConfig extends Config {
 
