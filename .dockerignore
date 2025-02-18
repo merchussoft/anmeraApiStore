@@ -1,0 +1,11 @@
+node_modules
+
+*.log
+*.pem
+*.key
+
+# Archivos de Git y editor
+.git
+.gitignore
+.vscode/
+.idea/
