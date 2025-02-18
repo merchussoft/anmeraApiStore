@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo "deteniendo los contendores"
-                    sh 'docker compose down -v --remove-orphans'
+                    sh 'docker compose down -v'
                 }
             }
         }
