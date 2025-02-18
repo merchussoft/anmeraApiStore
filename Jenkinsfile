@@ -57,7 +57,8 @@ pipeline {
 						-Dsonar.projectName=anmeraApiStore \
                         -Dsonar.projectVersion=1.0 \
                         -Dsonar.sources=/var/jenkins_home/workspace/anmeraApiStore \
-                        -Dsonar.sourceEncoding=UTF-8
+                        -Dsonar.sourceEncoding=UTF-8 \
+                        -Dsonar.exclusions="**/Dockerfile"
 					'''
                     echo 'SonarQube Analysis Completed'
                 }
