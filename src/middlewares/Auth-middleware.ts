@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 export const authJwtValidate = (req: Request, res: Response, next: NextFunction): void => {
     const authHeader = req.header('Authorization');
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!authHeader.startsWith('Bearer ')) {
         res.status(401).json({ message: 'Token no proporcionado o inválido' });
         return;
     }
