@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     echo "deteniendo los contendores"
-                    sh 'docker compose -v'
+                    sh 'docker compose down -v'
                 }
             }
         }
