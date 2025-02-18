@@ -1,5 +1,5 @@
 services:
-  anmeraApiStore:
+  anmeraapistore:
     build:
       context: .
     container_name: anmeraApiStoreNuevo
