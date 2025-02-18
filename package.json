@@ -17,6 +17,15 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.4",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "start": "yarn build && node dist/index.js",
+    "dev": "ts-node-dev index.ts",
+    "build": "tsc"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
