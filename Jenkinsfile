@@ -22,6 +22,22 @@ pipeline {
             }
         }
 
+        stage('analisis con sonarqube') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube') {
+                    sh '''
+					$SCANNER_HOME/bin/sonar-scanner \
+						-Dsonar.projectKey=anmeraApiStore \
+						-Dsonar.projectName=anmeraApiStore \
+                        -Dsonar.projectVersion=1.0 \
+                        -Dsonar.sources=/var/jenkins_home/workspace/anmeraApiStore \
+                        -Dsonar.sourceEncoding=UTF-8
+					'''
+                    echo 'SonarQube Analysis Completed'
+                }
+            }
+        }
+
         stage('compilando el contendor') {
             steps {
                 sh 'docker compose build --no-cache'
