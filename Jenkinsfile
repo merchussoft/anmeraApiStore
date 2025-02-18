@@ -14,11 +14,30 @@ pipeline {
 
     stages {
 
+        stage('Crear las variables de entorno en un archivo .env') {
+            steps {
+                script {
+                    writeFile file: '.env', text: """
+                    DB_HOST=${DB_HOST}
+                    DB_USER=${DB_USER}
+                    DB_PASSWORD=${DB_PASSWORD}
+                    DB_NAME=${DB_NAME}
+                    DB_PORT=${DB_PORT}
+
+                    DB_NAME_BASEADMIN=${DB_NAME_BASEADMIN}
+
+
+                    JWT_SECRET=${JWT_SECRET}
+                    """.trim()
+                }
+            }
+        }
+
         stage('detener contanedores anteriores desplegado') {
             steps {
                 script {
                     echo "deteniendo los contendores"
-                    sh 'docker compose down -v'
+                    sh 'docker compose down -v --remove-orphans'
                 }
             }
         }
@@ -45,24 +64,7 @@ pipeline {
             }
         }
 
-        stage('Crear las variables de entorno en un archivo .env') {
-            steps {
-                script {
-                    writeFile file: '.env', text: """
-                    DB_HOST=${DB_HOST}
-                    DB_USER=${DB_USER}
-                    DB_PASSWORD=${DB_PASSWORD}
-                    DB_NAME=${DB_NAME}
-                    DB_PORT=${DB_PORT}
-
-                    DB_NAME_BASEADMIN=${DB_NAME_BASEADMIN}
-
-
-                    JWT_SECRET=${JWT_SECRET}
-                    """.trim()
-                }
-            }
-        }
+        
 
         stage('compilando el contendor') {
             steps {
