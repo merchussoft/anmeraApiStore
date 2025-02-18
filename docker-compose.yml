@@ -2,6 +2,8 @@ services:
   anmeraapistore:
     build:
       context: .
+    env_file:
+      - .env
     container_name: anmeraApiStoreNuevo
     ports:
       - 3091:3091

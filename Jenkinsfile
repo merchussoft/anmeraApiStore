@@ -3,6 +3,13 @@ pipeline {
 
     environment {
         SCANNER_HOME = tool 'sonarqube'
+        DB_HOST = credentials('DB_HOST_ANMERASTORE')
+        DB_USER = credentials('DB_USER_ANMERASTORE')
+        DB_PASSWORD = credentials('DB_PASSWORD_ANMERASTORE')
+        DB_NAME = credentials('DB_NAME_ANMERASTORE')
+        DB_PORT = credentials('DB_PORT_ANMERASTORE')
+        DB_NAME_BASEADMIN = credentials('DB_NAME_BASEADMIN_ANMERASTORE')
+        JWT_SECRET = credentials('JWT_SECRET_ANMERASTORE')
     }
 
     stages {
@@ -11,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo "deteniendo los contendores"
-                    sh 'docker compose down -v'
+                    sh 'docker compose down -v --remove-orphans'
                 }
             }
         }
@@ -34,6 +41,25 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8
 					'''
                     echo 'SonarQube Analysis Completed'
+                }
+            }
+        }
+
+        stage('Crear las variables de entorno en un archivo .env') {
+            steps {
+                script {
+                    writeFile file: '.env', text: """
+                    DB_HOST=${DB_HOST}
+                    DB_USER=${DB_USER}
+                    DB_PASSWORD=${DB_PASSWORD}
+                    DB_NAME=${DB_NAME}
+                    DB_PORT=${DB_PORT}
+
+                    DB_NAME_BASEADMIN=${DB_NAME_BASEADMIN}
+
+
+                    JWT_SECRET=${JWT_SECRET}
+                    """.trim()
                 }
             }
         }
