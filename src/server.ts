@@ -8,12 +8,21 @@ class App {
 
     constructor(){
         this.app = express();
+        this.middleware();
         this.routes();
+    }
+
+    private middleware() {
+        this.app.use(cors());
+        this.app.use(express.urlencoded({extended: true}));
+        this.app.use(express.json());
     }
 
     private routes() {
         this.app.use('/api', homeRoutes);
     }
+
+    
 }
 
 export default new App().app;
