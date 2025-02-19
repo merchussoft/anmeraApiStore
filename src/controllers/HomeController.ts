@@ -42,7 +42,7 @@ export class HomeController {
     }
 
     async logout(req: Request, res: Response) {
-        const token = await tokenRequest(req);
+        const token = tokenRequest(req);
         if(!token){
             res.status(401).json({ message: 'Token no proporcionado o inválido' });
             return;
